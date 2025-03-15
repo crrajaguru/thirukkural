@@ -105,6 +105,9 @@ export const getAllChapters = () => {
     );
 };
 
+/**
+ * Get Kural by chapters
+ */
 export const getKuralByChapter = (chapterNumber: number): Kural[] => {
     const chapter = details.flatMap((section: { section: { detail: Section[] } }) =>
         section.section.detail.flatMap(group =>
@@ -117,7 +120,9 @@ export const getKuralByChapter = (chapterNumber: number): Kural[] => {
     return chapter ? thirukkural.kural.slice(chapter.start - 1, chapter.end) : [];
 };
 
-
+/**
+ * Get kural by number
+ */
 export const getSongByNumber = (songNumber: number): Kural | undefined => {
     return thirukkural.kural.find((kural: Kural) => kural.Number === songNumber);
 };
