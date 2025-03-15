@@ -1,0 +1,1 @@
+export {getSections, getChapterGroups, getChapters, getAllChapterGroups, getAllChapters} from './thirukkural/thirukkural';

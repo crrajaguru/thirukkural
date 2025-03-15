@@ -1,0 +1,14 @@
+{
+    "name": "thirukkural",
+    "version": "1.0.0",
+    "repository": "https://github.com/crrajaguru/thirukkural.git",
+    "author": "Rajaguru R <crrajaguru@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "compile": "rm -rf dist/lib && tsc && tsc --build tsconfig.es5.json"
+    },
+    "devDependencies": {
+        "@types/node": "^22.13.10",
+        "typescript": "^5.8.2"
+    }
+}

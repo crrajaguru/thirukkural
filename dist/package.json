@@ -1,0 +1,33 @@
+{
+    "name": "@thirukkural/thirukkural",
+    "version": "0.1.0",
+    "description": "A thirukkural Package that give set of functions to read thirukkural",
+    "main": "lib/es5/index.js",
+    "module": "lib/es6/index.js",
+    "sideEffects": false,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/crrajaguru/thirukkural.git"
+    },
+    "files": [
+        "lib",
+        "CHANGELOG.md",
+        "LICENSE",
+        "package.json",
+        "README.md"
+    ],
+    "keywords": [
+        "thirukkural",
+        "kural",
+        "tamil",
+        "valluvar",
+        "thiruvalluvar"
+    ],
+    "author": "Rajaguru R",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/crrajaguru/thirukkural/issues"
+    },
+    "homepage": "https://github.com/crrajaguru/thirukkural"
+
+}
