@@ -1,4 +1,5 @@
 import details from './data/detail.json';
+import thirukkural from './data/thirukkural.json';
 
 type Chapter = {
     name: string;
@@ -38,6 +39,20 @@ type ThirukkuralData = {
         detail: Section[];
     };
 }[];
+
+type Kural = {
+    Number: number;
+    Line1: string;
+    Line2: string;
+    Translation: string;
+    mv: string;
+    sp: string;
+    mk: string;
+    explanation: string;
+    couplet: string;
+    transliteration1: string;
+    transliteration2: string;
+};
 
 // Ensure TypeScript understands `details` structure
 const thirukkuralData: ThirukkuralData = details;
@@ -88,4 +103,21 @@ export const getAllChapters = () => {
             cg.chapters.detail.map((chapter: Chapter) => chapter.name)
         )
     );
+};
+
+export const getKuralByChapter = (chapterNumber: number): Kural[] => {
+    const chapter = details.flatMap((section: { section: { detail: Section[] } }) =>
+        section.section.detail.flatMap(group =>
+            group.chapterGroup.detail.flatMap(chapterGroup =>
+                chapterGroup.chapters.detail.find(ch => ch.number === chapterNumber)
+            )
+        )
+    ).filter(Boolean)[0];
+
+    return chapter ? thirukkural.kural.slice(chapter.start - 1, chapter.end) : [];
+};
+
+
+export const getSongByNumber = (songNumber: number): Kural | undefined => {
+    return thirukkural.kural.find((kural: Kural) => kural.Number === songNumber);
 };

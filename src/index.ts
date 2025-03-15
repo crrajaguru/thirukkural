@@ -1,1 +1,9 @@
-export {getSections, getChapterGroups, getChapters, getAllChapterGroups, getAllChapters} from './thirukkural/thirukkural';
+export {
+    getSections, 
+    getChapterGroups, 
+    getChapters, 
+    getAllChapterGroups, 
+    getAllChapters,
+    getKuralByChapter,
+    getSongByNumber
+} from './thirukkural/thirukkural';
