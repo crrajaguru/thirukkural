@@ -69,6 +69,12 @@ const kural = getSongByNumber(1);
 console.log(kural);
 ```
 
+#### Get a kural by its words
+```typescript
+const kurals = kuralSearch('உலகு');
+console.log(kurals);
+```
+
 ## Data Source
 
 The kural data is sourced from the [thirukkural](https://github.com/tk120404/thirukkural) repository.

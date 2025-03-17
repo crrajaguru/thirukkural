@@ -88,6 +88,13 @@ import {
    console.log(kural);
    ```
 
+8. **`kuralSearch(query: string)`**: The search query (one or more words)..
+
+   ```typescript
+   const kurals = kuralSearch('உலகு'); // For kural have word 'உலகு' in it
+   console.log(kurals);
+   ```
+
 ## Data Source
 
 The kural data utilized in this library is sourced from the [thirukkural](https://github.com/tk120404/thirukkural) repository. We extend our gratitude to the contributors for making this valuable resource available.

@@ -56,16 +56,19 @@ type Kural = {
 
 // Ensure TypeScript understands `details` structure
 const thirukkuralData: ThirukkuralData = details;
-
+const kurals: Kural[] = thirukkural.kural;
 /**
- * Get all section names
+ * Get all section names.
+ * @returns {string[]} - List of section names.
  */
 export const getSections = () => {
     return thirukkuralData[0].section.detail.map((section: Section) => section.name);
 };
 
 /**
- * Get chapter groups based on section number
+ * Get chapter groups based on section number.
+ * @param {number} sectionNumber - Section number.
+ * @returns {string[]} - List of chapter group names.
  */
 export const getChapterGroups = (sectionNumber: number) => {
     const section = thirukkuralData[0].section.detail.find((s: Section) => s.number === sectionNumber);
@@ -73,7 +76,9 @@ export const getChapterGroups = (sectionNumber: number) => {
 };
 
 /**
- * Get chapters based on chapter group number
+ * Get chapters based on chapter group number.
+ * @param {number} chapterGroupNumber - Chapter group number.
+ * @returns {string[]} - List of chapter names.
  */
 export const getChapters = (chapterGroupNumber: number) => {
     for (const section of thirukkuralData[0].section.detail) {
@@ -86,7 +91,8 @@ export const getChapters = (chapterGroupNumber: number) => {
 };
 
 /**
- * Get all chapter groups
+ * Get all chapter groups.
+ * @returns {string[]} - List of all chapter group names.
  */
 export const getAllChapterGroups = () => {
     return thirukkuralData[0].section.detail.flatMap((section: Section) =>
@@ -95,7 +101,8 @@ export const getAllChapterGroups = () => {
 };
 
 /**
- * Get all chapters
+ * Get all chapters.
+ * @returns {string[]} - List of all chapter names.
  */
 export const getAllChapters = () => {
     return thirukkuralData[0].section.detail.flatMap((section: Section) =>
@@ -106,23 +113,38 @@ export const getAllChapters = () => {
 };
 
 /**
- * Get Kural by chapters
+ * Get Kural by chapter number.
+ * @param {number} chapterNumber - Chapter number.
+ * @returns {Kural[]} - List of Kurals in the chapter.
  */
 export const getKuralByChapter = (chapterNumber: number): Kural[] => {
-    const chapter = details.flatMap((section: { section: { detail: Section[] } }) =>
-        section.section.detail.flatMap(group =>
-            group.chapterGroup.detail.flatMap(chapterGroup =>
-                chapterGroup.chapters.detail.find(ch => ch.number === chapterNumber)
-            )
-        )
-    ).filter(Boolean)[0];
+    const chapter = thirukkuralData[0].section.detail
+        .flatMap((section) => section.chapterGroup.detail)
+        .flatMap((chapterGroup) => chapterGroup.chapters.detail)
+        .find((ch) => ch.number === chapterNumber);
 
-    return chapter ? thirukkural.kural.slice(chapter.start - 1, chapter.end) : [];
+    return chapter ? kurals.slice(chapter.start - 1, chapter.end) : [];
 };
 
 /**
- * Get kural by number
+ * Get Kural by number.
+ * @param {number} songNumber - Kural number.
+ * @returns {Kural | undefined} - The matching Kural.
  */
 export const getSongByNumber = (songNumber: number): Kural | undefined => {
-    return thirukkural.kural.find((kural: Kural) => kural.Number === songNumber);
+    return kurals.find((kural) => kural.Number === songNumber);
+};
+
+/**
+ * Search for Kurals by matching words in Line1 and Line2.
+ * @param {string} query - The search query (one or more words).
+ * @returns {Kural[]} - List of matching Kurals.
+ */
+export const kuralSearch = (query: string): Kural[] => {
+    if (!query.trim()) return [];
+
+    const words = query.split(/\s+/); // Split query into words
+    return kurals.filter((kural) =>
+        words.some((word) => kural.Line1.includes(word) || kural.Line2.includes(word))
+    );
 };
