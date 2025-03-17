@@ -5,5 +5,6 @@ export {
     getAllChapterGroups, 
     getAllChapters,
     getKuralByChapter,
-    getSongByNumber
+    getSongByNumber,
+    kuralSearch
 } from './thirukkural/thirukkural';
